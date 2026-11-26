@@ -12,7 +12,8 @@ import 'package:dio/dio.dart' show Options;
 enum SubtitleFormat implements EnumWithLabel {
   json('JSON'),
   vtt('WEBVTT'),
-  srt('SRT');
+  srt('SRT'),
+  txt('TXT');
 
   @override
   final String label;
@@ -71,6 +72,9 @@ abstract final class SubtitleUtils {
       );
     return sb.toString();
   }
+
+  static String json2Txt(List list) =>
+      list.map((item) => (item['content'] as String).trim()).join('\n');
 
   static Future<Uint8List?> getSubtitle(String url) async {
     final res = await Request.dio.get<Uint8List>(

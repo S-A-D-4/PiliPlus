@@ -1149,7 +1149,9 @@ class HeaderControlState extends State<HeaderControl>
                         (e) => PopupMenuItem(
                           value: e,
                           height: 35,
-                          child: Text(e.label),
+                          child: Text(
+                            e == .txt ? '${e.label}（无时间戳）' : e.label,
+                          ),
                         ),
                       )
                       .toList(),
@@ -1186,7 +1188,7 @@ class HeaderControlState extends State<HeaderControl>
                 try {
                   final Uint8List bytes;
                   switch (format) {
-                    case .vtt || .srt:
+                    case .vtt || .srt || .txt:
                       var subtitle = format == .vtt
                           ? videoDetailCtr.vttSubtitles[i]?.id
                           : null;
